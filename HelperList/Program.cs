@@ -8,9 +8,9 @@ namespace HelperList
         static void Main(string[] args)
         {
 
-            List<object> numbers = new List<object>() { 1, 2, 2, 2, 3, 4, 3, 6, 3, 3, 5 };
+            List<object> numbers = new List<object>() { 1, 2, 2, 2, 3, 4, 6, 3, 3, 3, 5 };
             List<object> unique = numbers.GetUnique();
-            List<object> duplicates = numbers.GetDuplicates(unique);
+            List<object> duplicates = numbers.GetDuplicates();
 
             foreach (object item in unique)
             {
@@ -47,23 +47,23 @@ namespace HelperList
             return outPutList;
         }
 
-        // оно тут всё неправильное я уже не знаю как что делать
-        public static List<T> GetDuplicates<T>(this List<T> givenList, List<T> unique)
+        public static List<T> GetDuplicates<T>(this List<T> givenList)
         {
-            List<T> outPutList = new List<T>();
+            List<T> temp = new List<T>();
+            List<T> result = new List<T>();
 
-                for (int i = 0; i< givenList.Count; i++)
+            foreach (var checkable in givenList)
+            {
+                if (temp.Contains(checkable))
                 {
-
-           
-                    if (givenList.Contains(givenList[i]) )
-                    {
-                        outPutList.Add(givenList[i]);
-                    }
+                    result.Add(checkable);
+                } 
+                else
+                {
+                    temp.Add(checkable);
                 }
-            
-
-            return outPutList;
+            }
+            return result;
         }
     }
 }
